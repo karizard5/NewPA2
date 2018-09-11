@@ -12,11 +12,11 @@ struct Player: CustomStringConvertible{
     
     
     var description: String{
-        return ""
+        return " \(battleShipBoard)"
     }
       
-    var battleshipBoard: BattleshipBoard
-    var ships: [String]
+    var battleShipBoard: BattleshipBoard
+    var ships: [Ship]
     var playerNumber: Int
     
     

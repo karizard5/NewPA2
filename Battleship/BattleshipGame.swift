@@ -31,10 +31,16 @@ struct BattleshipGame: CustomStringConvertible{
         print(rules,"\n")
         print("Player 1's board: \n")
         let playerOneBoard = BattleshipBoard()
-        let playerOneShips = [Ship(),Ship(),Ship(),Ship(),Ship()]
-        let playerOne = Player(
+        let coordinates = Coordinates(row: 0, column: 0)
+        //let cell = Cell(coordinates: coordinates, symbol: "-")
         
-        print(playerOneBoard)
+        var playerOneShips: [Ship] = [Ship(),Ship(),Ship(),Ship(),Ship()]
+        let playerOne = Player(battleShipBoard: playerOneBoard, ships: playerOneShips, playerNumber: 1)
+        
+        
+        
+        
+        print(playerOne)
         
         print("")
         print("Player 2's board: \n")
@@ -42,24 +48,11 @@ struct BattleshipGame: CustomStringConvertible{
         let playerTwoBoard = BattleshipBoard()
         print(playerTwoBoard)
         return ""
-        
-        
-    }
-    
-    
-    
-    func createShipsForPlayerOne(){
-        let pOneCarrier = Ship(name: "Carrier", length: 5, occupiedCells: [[Cell(coordinates: Coordinates(row: 0, column: 0), symbol: "<#T##Character#>")],[Cell]], symbol: "c", hits: 0)
-        
-    }
-    
-    func createShipsForPlayerTwo(){
-        
-    }
 
 
+ 
 }
 
-
+}
 
     
