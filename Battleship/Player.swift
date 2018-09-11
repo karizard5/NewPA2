@@ -11,10 +11,13 @@ import Foundation
 struct Player: CustomStringConvertible{
     
     
-    var description: String
-    
-    var battleshipBoard: String
+    var description: String{
+        return ""
+    }
+      
+    var battleshipBoard: BattleshipBoard
     var ships: [String]
+    var playerNumber: Int
     
     
     

@@ -12,14 +12,20 @@ import Foundation
 struct Ship: CustomStringConvertible{
     
     
-    var description: String
+    var description: String{
+        return "This is a \(name)"
+    }
     
-    var name: String
-    var length: Int
-    var occupiedCells: [String]
-    var symbol: Character
-    var hits: Int
+    var name: String = ""
+    var length: Int = 0
+    var occupiedCells: [Cell] = []
+    var symbol: Character = "-"
+    var hits: Int = 0
+    
+    
+        
+    }
     
     
     
-}
+
