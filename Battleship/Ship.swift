@@ -16,7 +16,7 @@ struct Ship: CustomStringConvertible{
     
     var name: String
     var length: Int
-    var occupiedCells: Array<String>
+    var occupiedCells: [String]
     var symbol: Character
     var hits: Int
 }
