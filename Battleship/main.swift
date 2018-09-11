@@ -8,17 +8,5 @@
 
 import Foundation
 
-print("Hello, World!")
-
-
-
-
-func BattleshipClassDriver() {
-    let playerOneBoard = BattleshipBoard(numRows: 10, numColumns: 10)
-    print(playerOneBoard)
-    
-    
-}
-
-
-BattleshipClassDriver()
+let newGame = BattleshipGame()
+print(newGame)

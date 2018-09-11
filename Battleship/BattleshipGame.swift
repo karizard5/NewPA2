@@ -7,4 +7,14 @@
 //
 
 import Foundation
+struct BattleshipGame: CustomStringConvertible{
+    
+    var description: String{
+        let playerOneBoard = BattleshipBoard()
+        print(playerOneBoard)
+        return ""
+    }
+}
 
+
+    
