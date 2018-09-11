@@ -16,4 +16,6 @@ struct Player: CustomStringConvertible{
     var battleshipBoard: String
     var ships: [String]
     
+    
+    
 }

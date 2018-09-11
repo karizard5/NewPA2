@@ -13,6 +13,7 @@ struct BattleshipBoard: CustomStringConvertible{
     var numColumns: Int
     var grid: [[Cell]]
     
+  
     
     var description: String{
         var gridString: String = ""
@@ -58,6 +59,13 @@ struct BattleshipBoard: CustomStringConvertible{
             }
             grid.append(gridRow)
         }
+        
+    }
+    
+    
+    
+    func placeShipsOnBoard(){
+        
         
     }
     

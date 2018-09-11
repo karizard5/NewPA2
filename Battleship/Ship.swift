@@ -19,4 +19,7 @@ struct Ship: CustomStringConvertible{
     var occupiedCells: [String]
     var symbol: Character
     var hits: Int
+    
+    
+    
 }
