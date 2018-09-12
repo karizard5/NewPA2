@@ -61,13 +61,6 @@ struct BattleshipBoard: CustomStringConvertible{
         }
         
     }
-    
-    
-    
-    func placeShipsOnBoard(){
-        
-        
-    }
-    
+
     
 }

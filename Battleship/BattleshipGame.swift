@@ -41,8 +41,8 @@ struct BattleshipGame: CustomStringConvertible{
         let coordinates = Coordinates(row: 0, column: 0)
         //let cell = Cell(coordinates: coordinates, symbol: "-")
         
-        var playerOneShips: [Ship] = [Ship(),Ship(),Ship(),Ship(),Ship()]
-        let playerOne = Player(battleShipBoard: playerOneBoard, ships: playerOneShips, playerNumber: 1)
+        
+        let playerOne = Player(battleShipBoard: playerOneBoard, ships: [] , playerNumber: 1)
         
         
         
@@ -54,6 +54,12 @@ struct BattleshipGame: CustomStringConvertible{
         
         let playerTwoBoard = BattleshipBoard()
         print(playerTwoBoard)
+        
+        
+        let playerTwo = Player(battleShipBoard: playerTwoBoard, ships: [], playerNumber: 2)
+        
+        playerOne.placeShipsOnBoard()
+        playerTwo.placeShipsOnBoard()
         
 
     }
