@@ -9,4 +9,4 @@
 import Foundation
 
 let newGame = BattleshipGame()
-print(newGame)
+newGame.playGameDriver()

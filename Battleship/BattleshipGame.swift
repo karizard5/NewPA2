@@ -10,6 +10,13 @@ import Foundation
 struct BattleshipGame: CustomStringConvertible{
     
     var description: String{
+
+        return ""
+ 
+}
+    
+    
+    func playGameDriver(){
         let rules: String = """
         ******* Welcome to BattleShip ******* \n
         This is a game of strategy and luck! \n
@@ -26,7 +33,7 @@ struct BattleshipGame: CustomStringConvertible{
            if you have sunk a ship completely.
         """
         
-
+        
         
         print(rules,"\n")
         print("Player 1's board: \n")
@@ -47,12 +54,9 @@ struct BattleshipGame: CustomStringConvertible{
         
         let playerTwoBoard = BattleshipBoard()
         print(playerTwoBoard)
-        return ""
+        
 
-
- 
-}
-
+    }
 }
 
     
