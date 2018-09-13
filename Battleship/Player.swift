@@ -20,7 +20,7 @@ struct Player: CustomStringConvertible{
     var playerNumber: Int
     
     
-    func placeShipsOnBoard() -> [Ship]{
+    func createShipsOnBoard() -> [Ship]{
         
         var carrier = Ship(name: "Carrier", length: 5, occupiedCells: [], symbol: "c", hits: 0)
         var battleship = Ship(name: "Battleship", length: 4, occupiedCells: [], symbol: "b", hits: 0)
@@ -36,4 +36,18 @@ struct Player: CustomStringConvertible{
         return playerShips
     }
     
+    func placeShipsOnBoard(playerShips:[Ship], board: BattleshipBoard) -> [Ship]{
+        let randRow = arc4random_uniform(10)
+        let randRowInt = Int(randRow)
+        let randColumn = arc4random_uniform(10)
+        let randColumnInt = Int(randColumn)
+        
+        for ships in 0..<5{
+            if board.grid[randRowInt][randColumnInt] {
+                
+            }
+        }
+        
+        return playerShips
+    }
 }
