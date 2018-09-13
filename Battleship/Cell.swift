@@ -14,6 +14,7 @@ struct Cell: CustomStringConvertible{
     var symbol: Character = "-"
     
     
+    
     var description: String{
         let boardSymbol = String(symbol)
         return boardSymbol

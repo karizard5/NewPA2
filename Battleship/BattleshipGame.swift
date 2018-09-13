@@ -43,23 +43,28 @@ struct BattleshipGame: CustomStringConvertible{
         
         
         let playerOne = Player(battleShipBoard: playerOneBoard, ships: [] , playerNumber: 1)
+        let playerOneShips = playerOne.createShipsOnBoard()
         
         
         
         
-        print(playerOne)
+        //print(playerOne)
         
         print("")
         print("Player 2's board: \n")
         
         let playerTwoBoard = BattleshipBoard()
-        print(playerTwoBoard)
+        //print(playerTwoBoard)
         
         
         let playerTwo = Player(battleShipBoard: playerTwoBoard, ships: [], playerNumber: 2)
         
-        playerOne.createShipsOnBoard()
+        
         playerTwo.createShipsOnBoard()
+        
+        var newShipLocations = playerOne.placeShipsOnBoard(playerShips: playerOneShips, board: playerOneBoard)
+        print("\n PlayerOne updated board")
+        print(newShipLocations)
         
 
     }

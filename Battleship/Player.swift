@@ -32,22 +32,58 @@ struct Player: CustomStringConvertible{
         
         let playerShips = [carrier, battleship, crusier, submarine, destroyer]
         
-        print(playerShips)
+        
+        print(battleShipBoard)
+        //print(playerShips)
         return playerShips
     }
     
-    func placeShipsOnBoard(playerShips:[Ship], board: BattleshipBoard) -> [Ship]{
-        let randRow = arc4random_uniform(10)
-        let randRowInt = Int(randRow)
-        let randColumn = arc4random_uniform(10)
-        let randColumnInt = Int(randColumn)
+    func placeShipsOnBoard(playerShips:[Ship], board: BattleshipBoard) -> BattleshipBoard{
+        var randRow = arc4random_uniform(10)
+        var randColumn = arc4random_uniform(10)
+        var randRowInt = 0
+        var randColumnInt = Int(randColumn)
+        print(playerShips[1].length)
+
         
-        for ships in 0..<5{
-            if board.grid[randRowInt][randColumnInt] {
+        var workingBoard = board
+        
+        
+        
+        for shipIndex in 0..<playerShips.count{
+            randColumnInt = Int(randColumn)
+            randRowInt = Int(randRow)
+            for _ in 0..<playerShips[shipIndex].length{
                 
-            }
-        }
+                
+                
+                switch workingBoard.grid[randColumnInt][randRowInt].symbol{
+                    
+                case "-" :
+                   
+                    let orientationRandomizer = arc4random_uniform(1)
+                    workingBoard.grid[randColumnInt][randRowInt].symbol = playerShips[shipIndex].symbol
+                    randRowInt += 1
+                   
+                    
+
+                default:
+                    randRow = arc4random_uniform(10)
+                    randColumn = arc4random_uniform(10)
+                    randRowInt = Int(randRow)
+                    randColumnInt = Int(randColumn)
+                }
+                }
+            
         
-        return playerShips
+        
+
+       
+        }
+         return workingBoard
+}
+    
+    func fireOnUnknownSpot(location: Coordinates){
+        
     }
 }
