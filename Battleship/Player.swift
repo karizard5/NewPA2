@@ -108,7 +108,30 @@ struct Player: CustomStringConvertible{
          return workingBoard
 }
     
-    func fireOnUnknownSpot(location: Coordinates){
+    func fireOnUnknownSpot(){
+        print("Where would you like to fire? Enter row number first \n")
+        
+        let rowChoice: Int = 0
+        let columnChoice: Int = 0
+        
+        let rowEntryOptional = readLine()
+        print("Enter column number \n")
+        let columnEntryOptional = readLine()
+        
+        
+        
+        
+        if let columnEntryString = columnEntryOptional{
+            let columnChoiceOptional = Int(columnEntryString)
+            if let columnChoiceFinal = columnChoiceOptional{
+                let columnChoice = columnChoiceFinal
+            }
+            
+        }
+        
+        var firingCoords = Coordinates.init(row: rowChoice, column: columnChoice)
+        print("You chose to fire on \(rowChoice), \(columnChoice) \n")
+        
         
     }
 }

@@ -39,7 +39,7 @@ struct BattleshipGame: CustomStringConvertible{
         print("Player 1's board: \n")
         let playerOneBoard = BattleshipBoard()
         let coordinates = Coordinates(row: 0, column: 0)
-        //let cell = Cell(coordinates: coordinates, symbol: "-")
+        var gameWon: Bool = false
         
         
         let playerOne = Player(battleShipBoard: playerOneBoard, ships: [] , playerNumber: 1)
@@ -64,10 +64,15 @@ struct BattleshipGame: CustomStringConvertible{
         
         var newShipLocations = playerOne.placeShipsOnBoard(playerShips: playerOneShips, board: playerOneBoard)
         print("\n PlayerOne updated board \n")
-        print(newShipLocations)
+        print("\(newShipLocations) \n")
+        
+        while gameWon != true{
+            playerOne.fireOnUnknownSpot()
+            
+        }
         
 
     }
-}
 
+}
     
