@@ -34,16 +34,16 @@ struct Player: CustomStringConvertible{
         
         
         print(battleShipBoard)
-        //print(playerShips)
+        // print(playerShips)
         return playerShips
     }
     
     func placeShipsOnBoard(playerShips:[Ship], board: BattleshipBoard) -> BattleshipBoard{
-        var randRow = arc4random_uniform(10)
-        var randColumn = arc4random_uniform(10)
+        var randRow = arc4random_uniform(9)
+        var randColumn = arc4random_uniform(9)
         var randRowInt = 0
-        var randColumnInt = Int(randColumn)
-        print(playerShips[1].length)
+        var randColumnInt = 0
+        print("\n \(playerShips[1].length)")
 
         
         var workingBoard = board
@@ -51,19 +51,43 @@ struct Player: CustomStringConvertible{
         
         
         for shipIndex in 0..<playerShips.count{
+            
+            randRow = arc4random_uniform(10)
+            randColumn = arc4random_uniform(10)
             randColumnInt = Int(randColumn)
             randRowInt = Int(randRow)
-            for _ in 0..<playerShips[shipIndex].length{
-                
-                
-                
+            let orientationRandomizer = arc4random_uniform(2)
+            let shipLength = playerShips[shipIndex].length
+            
+            for _ in 0..<shipLength{
+           
                 switch workingBoard.grid[randColumnInt][randRowInt].symbol{
                     
-                case "-" :
-                   
-                    let orientationRandomizer = arc4random_uniform(1)
-                    workingBoard.grid[randColumnInt][randRowInt].symbol = playerShips[shipIndex].symbol
-                    randRowInt += 1
+                case "-" :                                                                                      // If space is unoccupied
+                    
+                    workingBoard.grid[randColumnInt][randRowInt].symbol = playerShips[shipIndex].symbol         // Append symbol to space
+                    if orientationRandomizer == 0{
+                        //zlet rowLength = workingBoard.grid[randRowInt].count
+                        //rint(rowLength)                                                                                        // 0 set as horzontal orientation
+                        if randRowInt == 9 {                                                                    // If initial location is at edge of board, move the other way
+                            randRowInt -= 1
+                                           }
+                            
+                        else{                                                                                   // If not at edge, keep placing
+                           randRowInt += 1
+                            }
+                        
+                                                 }
+                    
+                    else{                                                                                       // 1 set as vertical orientation
+                        if randColumnInt == 9 {                                                                 // If location is at end of board, move the other way
+                            randColumnInt -= 1
+                                              }
+                        else{
+                            randColumnInt += 1
+                             }
+                        
+                        }
                    
                     
 
@@ -72,7 +96,8 @@ struct Player: CustomStringConvertible{
                     randColumn = arc4random_uniform(10)
                     randRowInt = Int(randRow)
                     randColumnInt = Int(randColumn)
-                }
+                
+            }
                 }
             
         

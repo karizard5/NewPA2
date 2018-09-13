@@ -63,7 +63,7 @@ struct BattleshipGame: CustomStringConvertible{
         playerTwo.createShipsOnBoard()
         
         var newShipLocations = playerOne.placeShipsOnBoard(playerShips: playerOneShips, board: playerOneBoard)
-        print("\n PlayerOne updated board")
+        print("\n PlayerOne updated board \n")
         print(newShipLocations)
         
 
