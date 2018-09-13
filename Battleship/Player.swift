@@ -67,8 +67,8 @@ struct Player: CustomStringConvertible{
                     
                     workingBoard.grid[randColumnInt][randRowInt].symbol = playerShips[shipIndex].symbol         // Append symbol to space
                     if orientationRandomizer == 0{
-                        //zlet rowLength = workingBoard.grid[randRowInt].count
-                        //rint(rowLength)                                                                                        // 0 set as horzontal orientation
+                        //let remainingRowLength = workingBoard.grid[randRowInt].[Cell]
+                        //print(rowLength)                                                                                        // 0 set as horzontal orientation
                         if randRowInt == 9 {                                                                    // If initial location is at edge of board, move the other way
                             randRowInt -= 1
                                            }
