@@ -101,7 +101,7 @@ struct Player: CustomStringConvertible{
                         randRow = Int(arc4random_uniform(10))
                     }
                 }
-                print("Column: \(randRow), Row: \(randColumn)")
+               // print("Column: \(randRow), Row: \(randColumn)")
         }
         
         return ( randRow, randColumn, orientation, counterCheck)
@@ -116,6 +116,25 @@ struct Player: CustomStringConvertible{
         return (randRow, randColumn, orientationRandomizer)
     }
     
+    func placeShipOnBoard(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, Orientation: Int) -> BattleshipBoard{
+        var randRow = randRow
+        var randColumn = randColumn
+        var workingBoard = board
+        var ship = workingBoard.grid[randRow][randColumn].symbol
+        for length in 0..<playerShip.length{
+            workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
+            if Orientation == 1{
+                workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
+                randColumn += 1
+            }
+            if Orientation == 0{
+                workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
+                randRow += 1
+            }
+        }
+        
+        return workingBoard
+    }
 }
 
 
