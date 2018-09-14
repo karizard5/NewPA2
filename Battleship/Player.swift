@@ -38,7 +38,7 @@ struct Player: CustomStringConvertible{
         return playerShips
     }
     
-    func checkShipSpace(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, orientation: Int) -> (Int, Int, Int, Bool ){
+    func checkShipSpace(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, orientation: Int) -> (Int, Int, Int, Int){
         var workingBoard = board
         let randomTuple = generateRandomCoordinates()
         var randRow = randomTuple.0
@@ -46,12 +46,13 @@ struct Player: CustomStringConvertible{
         var orientation = randomTuple.2
         let shipLength = playerShip.length
         var isShipOkToPlace = true
+        var counterCheck: Int = 0
         
         
         
             while isShipOkToPlace == true{
     
-                if orientation == 0{
+                if orientation == 1{
                 let rowLength = workingBoard.grid[randRow].count
                     for i in randRow..<(shipLength + randRow){
                         if i >= rowLength{
@@ -64,7 +65,7 @@ struct Player: CustomStringConvertible{
                                 isShipOkToPlace = true
                             }
                             print("Horizontal")
-                           
+                           counterCheck += 1
                             
                             }
                         else {
@@ -78,7 +79,7 @@ struct Player: CustomStringConvertible{
                     
                 
                 
-                if orientation == 1{
+                if orientation == 0{
                 let columnLength = workingBoard.grid[randColumn].count
                     for i in randColumn..<(shipLength + randColumn){
                         if i >= columnLength{
@@ -90,6 +91,7 @@ struct Player: CustomStringConvertible{
                                 isShipOkToPlace = true
                             }
                             print("Vertical")
+                            counterCheck += 1
                         }
                         else{
                             isShipOkToPlace = true
@@ -99,9 +101,10 @@ struct Player: CustomStringConvertible{
                         randRow = Int(arc4random_uniform(10))
                     }
                 }
-                print(randRow,randColumn)
-            }
-        return ( randRow, randColumn, orientation, isShipOkToPlace)
+                print("Column: \(randRow), Row: \(randColumn)")
+        }
+        
+        return ( randRow, randColumn, orientation, counterCheck)
         }
     
     func generateRandomCoordinates() -> (Int,Int,Int){

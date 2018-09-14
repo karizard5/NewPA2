@@ -60,13 +60,22 @@ struct BattleshipGame: CustomStringConvertible{
         let playerTwo = Player(battleShipBoard: playerTwoBoard, ships: [], playerNumber: 2)
         
         
-        playerTwo.createShipsOnBoard()
+        let playerTwoShips = playerTwo.createShipsOnBoard()
         
         
         print("\n PlayerOne updated board \n")
         var playerCoordinates = Player.generateRandomCoordinates(playerOne)
         let player1FirstShip = playerOne.checkShipSpace(playerShip: playerOneShips[0], board: playerOneBoard, randRow: playerCoordinates().0, randColumn: playerCoordinates().1, orientation: playerCoordinates().2)
-       
+        print("")
+        var player2FirstShip: (Int, Int, Int, Int) = (0,0,0,0)
+        print(player1FirstShip)
+        print("")
+        print("This is player 2's data: \n")
+        while player2FirstShip.3 != playerTwoShips[0].length{
+            player2FirstShip = playerTwo.checkShipSpace(playerShip: playerTwoShips[0], board: playerTwoBoard, randRow: playerCoordinates().0, randColumn: playerCoordinates().1, orientation: playerCoordinates().2)
+            print("This loop is running")
+        }
+       print(" \n \(player2FirstShip)")
         
 //        while gameWon != true{
 ////            playerOne.fireOnUnknownSpot()
