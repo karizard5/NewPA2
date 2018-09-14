@@ -1,6 +1,10 @@
-//
 //  BattleshipGame.swift
 //  Battleship
+//
+//  This file houses the battleship game type
+//  CPSC 312
+//  Programming assignment #2
+//  No sources to site
 //
 //  Created by Reid, Jon Carl on 9/9/18.
 //  Copyright © 2018 Reid, Jon Carl. All rights reserved.
@@ -104,7 +108,7 @@ struct BattleshipGame: CustomStringConvertible{
         
         while gameWon != true{
            var firingcoordinates = playerOne.fireOnUnknownSpot()
-            playerOneBoard.grid[firingcoordinates.0][firingcoordinates.1].checkMove(rowChoice: firingcoordinates.0, columnChoice: firingcoordinates.1, board: &workingBoard2)
+            var playerOneWorkingBoard = playerOneBoard.grid[firingcoordinates.0][firingcoordinates.1].checkMove(rowChoice: firingcoordinates.0, columnChoice: firingcoordinates.1, board: &workingBoard2)
             print(workingBoard2)
         }
         

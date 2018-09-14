@@ -1,7 +1,9 @@
-
-//
 //  Ship.swift
 //  Battleship
+//
+//  This file houses the ship type
+//  CPSC 312
+//  Programming assignment #2
 //
 //  Created by Reid, Jon Carl on 9/9/18.
 //  Copyright © 2018 Reid, Jon Carl. All rights reserved.
@@ -23,9 +25,7 @@ struct Ship: CustomStringConvertible{
     var symbol: Character = " "
     var hits: Int = 0
     
-//    init(){
-//
-//    }
+
       
     }
     

@@ -1,8 +1,10 @@
-
-
-//
 //  Player.swift
 //  Battleship
+//
+//  This file houses the player type
+//  CPSC 312
+//  Programming assignment #2
+//  No sources to site
 //
 //  Created by Reid, Jon Carl on 9/9/18.
 //  Copyright © 2018 Reid, Jon Carl. All rights reserved.
@@ -136,6 +138,7 @@ struct Player: CustomStringConvertible{
         
         return (randRow, randColumn, orientationRandomizer)
     }
+    
     func placeShipOnBoard(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, Orientation: Int) -> BattleshipBoard{
         var randRow = randRow
         var randColumn = randColumn

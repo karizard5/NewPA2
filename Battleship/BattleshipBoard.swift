@@ -1,13 +1,17 @@
-//
 //  BattleshipBoard.swift
 //  Battleship
+//
+//  This file houses the battleship board class
+//  CPSC 312
+//  Programming assignment #2
+//  No sources to site
 //
 //  Created by Reid, Jon Carl on 9/9/18.
 //  Copyright © 2018 Reid, Jon Carl. All rights reserved.
 //
 import Foundation
 
-struct BattleshipBoard: CustomStringConvertible{
+class BattleshipBoard: CustomStringConvertible{
     
     var numRows: Int
     var numColumns: Int
