@@ -38,100 +38,78 @@ struct Player: CustomStringConvertible{
         return playerShips
     }
     
-    func placeShipsOnBoard(playerShips:[Ship], board: BattleshipBoard) -> BattleshipBoard{
-        var randRow = arc4random_uniform(9)
-        var randColumn = arc4random_uniform(9)
-        var randRowInt = 0
-        var randColumnInt = 0
-        print("\n \(playerShips[1].length)")
-
-        
+    func checkShipSpace(playerShip: Ship, board: BattleshipBoard) -> BattleshipBoard{
+        var randRow: Int
+        var randColumn: Int
         var workingBoard = board
         
+        randRow = Int(arc4random_uniform(10))
+        randColumn = Int(arc4random_uniform(10))
+        let orientationRandomizer = arc4random_uniform(2)
+        let shipLength = playerShip.length
+        var isShipOkToPlace = true
         
-        
-        for shipIndex in 0..<playerShips.count{
-            
-            randRow = arc4random_uniform(10)
-            randColumn = arc4random_uniform(10)
-            randColumnInt = Int(randColumn)
-            randRowInt = Int(randRow)
-            let orientationRandomizer = arc4random_uniform(2)
-            let shipLength = playerShips[shipIndex].length
-            
-            for _ in 0..<shipLength{
-           
-                switch workingBoard.grid[randColumnInt][randRowInt].symbol{
-                    
-                case "-" :                                                                                      // If space is unoccupied
-                    
-                    workingBoard.grid[randColumnInt][randRowInt].symbol = playerShips[shipIndex].symbol         // Append symbol to space
-                    if orientationRandomizer == 0{
-                        //let remainingRowLength = workingBoard.grid[randRowInt].[Cell]
-                        //print(rowLength)                                                                                        // 0 set as horzontal orientation
-                        if randRowInt == 9 {                                                                    // If initial location is at edge of board, move the other way
-                            randRowInt -= 1
-                                           }
-                            
-                        else{                                                                                   // If not at edge, keep placing
-                           randRowInt += 1
-                            }
-                        
-                                                 }
-                    
-                    else{                                                                                       // 1 set as vertical orientation
-                        if randColumnInt == 9 {                                                                 // If location is at end of board, move the other way
-                            randColumnInt -= 1
-                                              }
-                        else{
-                            randColumnInt += 1
-                             }
-                        
-                        }
-                   
-                    
-
-                default:
-                    randRow = arc4random_uniform(10)
-                    randColumn = arc4random_uniform(10)
-                    randRowInt = Int(randRow)
-                    randColumnInt = Int(randColumn)
+            while isShipOkToPlace == true{
+                isShipOkToPlace = false
                 
-            }
+                if orientationRandomizer == 0{
+                let rowLength = workingBoard.grid[randRow].count
+                    for i in randRow..<(shipLength + randRow){
+                        if i >= (rowLength)  || workingBoard.grid[randRow][i].symbol != "-" {
+                            isShipOkToPlace = false
+                           //randColumn = Int(arc4random_uniform(10))
+                            
+                            
+                        }
+                        
+                    }
+                    
                 }
-            
+                
+                if orientationRandomizer == 1{
+                let columnLength = workingBoard.grid[randColumn].count
+                    for i in randColumn..<(shipLength + randColumn){
+                       
+                        if i >= (columnLength) || workingBoard.grid[i][randColumn].symbol != "-"{
+                            isShipOkToPlace = false
+                            //randRow = Int(arc4random_uniform(10))
+                            
+                            
+                            
+                        }
+                    }
+                }
+                print(randRow,randColumn)
+            }
         
-        
-
-       
-        }
+        workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
          return workingBoard
 }
     
-    func fireOnUnknownSpot(){
-        print("Where would you like to fire? Enter row number first \n")
-        
-        let rowChoice: Int = 0
-        let columnChoice: Int = 0
-        
-        let rowEntryOptional = readLine()
-        print("Enter column number \n")
-        let columnEntryOptional = readLine()
-        
-        
-        
-        
-        if let columnEntryString = columnEntryOptional{
-            let columnChoiceOptional = Int(columnEntryString)
-            if let columnChoiceFinal = columnChoiceOptional{
-                let columnChoice = columnChoiceFinal
-            }
-            
-        }
-        
-        var firingCoords = Coordinates.init(row: rowChoice, column: columnChoice)
-        print("You chose to fire on \(rowChoice), \(columnChoice) \n")
-        
-        
-    }
+//    func fireOnUnknownSpot(){
+//        print("Where would you like to fire? Enter row number first \n")
+//
+//        let rowChoice: Int = 0
+//        let columnChoice: Int = 0
+//
+//        let rowEntryOptional = readLine()
+//        print("Enter column number \n")
+//        let columnEntryOptional = readLine()
+//
+//
+//
+//
+//        if let columnEntryString = columnEntryOptional{
+//            let columnChoiceOptional = Int(columnEntryString)
+//            if let columnChoiceFinal = columnChoiceOptional{
+//                let columnChoice = columnChoiceFinal
+//            }
+//
+//        }
+//
+//        var firingCoords = Coordinates.init(row: rowChoice, column: columnChoice)
+//        print("You chose to fire on \(rowChoice), \(columnChoice) \n")
+//
+//
+//    }
 }

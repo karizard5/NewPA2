@@ -62,14 +62,14 @@ struct BattleshipGame: CustomStringConvertible{
         
         playerTwo.createShipsOnBoard()
         
-        var newShipLocations = playerOne.placeShipsOnBoard(playerShips: playerOneShips, board: playerOneBoard)
-        print("\n PlayerOne updated board \n")
-        print("\(newShipLocations) \n")
         
-        while gameWon != true{
-            playerOne.fireOnUnknownSpot()
-            
-        }
+        print("\n PlayerOne updated board \n")
+        playerOne.checkShipSpace(playerShip: playerOneShips[0], board: playerOneBoard)
+        
+//        while gameWon != true{
+////            playerOne.fireOnUnknownSpot()
+//
+//        }
         
 
     }
