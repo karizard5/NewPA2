@@ -1,4 +1,5 @@
 
+
 //
 //  Player.swift
 //  Battleship
@@ -12,13 +13,23 @@ struct Player: CustomStringConvertible{
     
     
     var description: String{
-        return " \(battleShipBoard)"
+        var statistics = ""
+        statistics += "Hits: \(hits)\n"
+        statistics += "Misses: \(misses)\n"
+        statistics += "Total Shots: \(totalShots)\n"
+        statistics += "Hits to Misses Ratio: \(hits/(hits + misses)*100)%"
+        return statistics
     }
       
     var battleShipBoard: BattleshipBoard
     var ships: [Ship]
     var playerNumber: Int
     
+    var hits: Int = 0
+    var misses: Int = 0
+    var totalShots: Int = 0
+    
+    var shipsLeft: Int
     
     func createShipsOnBoard() -> [Ship]{
         
@@ -40,10 +51,11 @@ struct Player: CustomStringConvertible{
     
     func checkShipSpace(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, orientation: Int) -> (Int, Int, Int, Int){
         var workingBoard = board
-        let randomTuple = generateRandomCoordinates()
-        var randRow = randomTuple.0
-        var randColumn = randomTuple.1
-        var orientation = randomTuple.2
+        let randomTuple1 = generateRandomCoordinatesPlayer1()
+        let randomTuple2 = generateRandomCoordinatesPlayer2()
+        var randRow = randomTuple1.0
+        var randColumn = randomTuple1.1
+        var orientation = randomTuple1.2
         let shipLength = playerShip.length
         var isShipOkToPlace = true
         var counterCheck: Int = 0
@@ -73,7 +85,7 @@ struct Player: CustomStringConvertible{
                         }
                         }
                     if isShipOkToPlace == false{
-                        randColumn = Int(arc4random_uniform(10))
+                        //randColumn = Int(arc4random_uniform(9))
                     }
                     }
                     
@@ -98,7 +110,7 @@ struct Player: CustomStringConvertible{
                         }
                     }
                     if isShipOkToPlace == false{
-                        randRow = Int(arc4random_uniform(10))
+                        //randRow = Int(arc4random_uniform(9))
                     }
                 }
                // print("Column: \(randRow), Row: \(randColumn)")
@@ -107,15 +119,23 @@ struct Player: CustomStringConvertible{
         return ( randRow, randColumn, orientation, counterCheck)
         }
     
-    func generateRandomCoordinates() -> (Int,Int,Int){
+    func generateRandomCoordinatesPlayer1() -> (Int,Int,Int){
         
-        let randRow = Int(arc4random_uniform(10))
-        let randColumn = Int(arc4random_uniform(10))
+        let randRow = Int(arc4random_uniform(9))
+        let randColumn = Int(arc4random_uniform(9))
         let orientationRandomizer = Int(arc4random_uniform(2))
         
         return (randRow, randColumn, orientationRandomizer)
     }
     
+    func generateRandomCoordinatesPlayer2() -> (Int,Int,Int){
+        
+        let randRow = Int(arc4random_uniform(9))
+        let randColumn = Int(arc4random_uniform(9))
+        let orientationRandomizer = Int(arc4random_uniform(2))
+        
+        return (randRow, randColumn, orientationRandomizer)
+    }
     func placeShipOnBoard(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, Orientation: Int) -> BattleshipBoard{
         var randRow = randRow
         var randColumn = randColumn
@@ -135,33 +155,49 @@ struct Player: CustomStringConvertible{
         
         return workingBoard
     }
-}
 
 
-//    func fireOnUnknownSpot(){
-//        print("Where would you like to fire? Enter row number first \n")
-//
-//        let rowChoice: Int = 0
-//        let columnChoice: Int = 0
-//
-//        let rowEntryOptional = readLine()
-//        print("Enter column number \n")
-//        let columnEntryOptional = readLine()
-//
-//
-//
-//
-//        if let columnEntryString = columnEntryOptional{
-//            let columnChoiceOptional = Int(columnEntryString)
-//            if let columnChoiceFinal = columnChoiceOptional{
-//                let columnChoice = columnChoiceFinal
-//            }
-//
-//        }
-//
-//        var firingCoords = Coordinates.init(row: rowChoice, column: columnChoice)
-//        print("You chose to fire on \(rowChoice), \(columnChoice) \n")
-//
-//
-//    }
+
+    func fireOnUnknownSpot() -> (Int,Int){
+        print("Where would you like to fire? Enter row number first, then space, then column\n")
+
+        
+        
+        var rowChoice: String = ""
+        var columnChoice: String = ""
+
+        var EntryOptional = readLine()
+        var entry = EntryOptional!
+        columnChoice = String(entry.suffix(1))
+        rowChoice = String(entry.prefix(1))
+            
+        var columnNumber = Int(columnChoice)
+        var rowNumber = Int(rowChoice)
+            
+        var realColumn = columnNumber!
+        var realRow = rowNumber!
+         
+        print("You fired on \(rowChoice),\(columnChoice)")
+            
+          return (realRow, realColumn)
+        }
+    
+        
+            }
+
+   
+    func gameWonYet(sinkCounter1: Int, sinkCounter2: Int)  -> String{
+        var response: String = ""
+        
+        if sinkCounter1 == 5{
+            response = ("Player 2 has won!")
+            print(response)
+        }
+        if sinkCounter2 == 5{
+            response = ("Player 1 has won!")
+            print(response)
+        }
+    return response
+        }
+    
 

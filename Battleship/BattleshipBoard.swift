@@ -61,6 +61,20 @@ struct BattleshipBoard: CustomStringConvertible{
         }
         
     }
-
     
-}
+   
+        }
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

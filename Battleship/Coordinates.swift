@@ -16,24 +16,5 @@ struct Coordinates: CustomStringConvertible{
     var description: String{
         return "\(row),\(column)"
     }
-//    
-//    func translateRowInput(rowInput: String?) -> Int{
-//        if let rowEntryOptional = rowInput{
-//            let rowChoiceOptional = Int(rowEntryOptional)
-//            if let rowChoiceFinal = rowChoiceOptional{
-//                 return rowChoiceFinal
-//            }
-//        }
-//        
-//    }
-//    
-//    func translateColumnInput(columnInput: String?) -> Int {
-//        if let columnEntryOptional = columnInput{
-//            let columnChoiceOptional = Int(columnEntryOptional)
-//            if let columnChoiceFinal = columnChoiceOptional{
-//                return columnChoiceFinal
-//            }
-//        }
-//        
-//    }
+
 }
