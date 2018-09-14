@@ -64,7 +64,9 @@ struct BattleshipGame: CustomStringConvertible{
         
         
         print("\n PlayerOne updated board \n")
-        playerOne.checkShipSpace(playerShip: playerOneShips[0], board: playerOneBoard)
+        var playerCoordinates = Player.generateRandomCoordinates(playerOne)
+        let player1FirstShip = playerOne.checkShipSpace(playerShip: playerOneShips[0], board: playerOneBoard, randRow: playerCoordinates().0, randColumn: playerCoordinates().1, orientation: playerCoordinates().2)
+       
         
 //        while gameWon != true{
 ////            playerOne.fireOnUnknownSpot()

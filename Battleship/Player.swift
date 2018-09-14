@@ -38,54 +38,84 @@ struct Player: CustomStringConvertible{
         return playerShips
     }
     
-    func checkShipSpace(playerShip: Ship, board: BattleshipBoard) -> BattleshipBoard{
-        var randRow: Int
-        var randColumn: Int
+    func checkShipSpace(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, orientation: Int) -> (Int, Int, Int, Bool ){
         var workingBoard = board
-        
-        randRow = Int(arc4random_uniform(10))
-        randColumn = Int(arc4random_uniform(10))
-        let orientationRandomizer = arc4random_uniform(2)
+        let randomTuple = generateRandomCoordinates()
+        var randRow = randomTuple.0
+        var randColumn = randomTuple.1
+        var orientation = randomTuple.2
         let shipLength = playerShip.length
         var isShipOkToPlace = true
         
+        
+        
             while isShipOkToPlace == true{
-                isShipOkToPlace = false
-                
-                if orientationRandomizer == 0{
+    
+                if orientation == 0{
                 let rowLength = workingBoard.grid[randRow].count
                     for i in randRow..<(shipLength + randRow){
-                        if i >= (rowLength)  || workingBoard.grid[randRow][i].symbol != "-" {
-                            isShipOkToPlace = false
-                           //randColumn = Int(arc4random_uniform(10))
-                            
-                            
+                        if i >= rowLength{
+                            break
                         }
-                        
+                        if i < rowLength && workingBoard.grid[randRow][i].symbol == "-" {
+                            
+                            isShipOkToPlace = false
+                            if randRow == (shipLength + randRow){
+                                isShipOkToPlace = true
+                            }
+                            print("Horizontal")
+                           
+                            
+                            }
+                        else {
+                            isShipOkToPlace = true
+                        }
+                        }
+                    if isShipOkToPlace == false{
+                        randColumn = Int(arc4random_uniform(10))
+                    }
                     }
                     
-                }
                 
-                if orientationRandomizer == 1{
+                
+                if orientation == 1{
                 let columnLength = workingBoard.grid[randColumn].count
                     for i in randColumn..<(shipLength + randColumn){
-                       
-                        if i >= (columnLength) || workingBoard.grid[i][randColumn].symbol != "-"{
-                            isShipOkToPlace = false
-                            //randRow = Int(arc4random_uniform(10))
-                            
-                            
-                            
+                        if i >= columnLength{
+                            break
                         }
+                        if i < columnLength && workingBoard.grid[i][randColumn].symbol == "-"{
+                            isShipOkToPlace = false
+                            if randColumn == (shipLength + randColumn){
+                                isShipOkToPlace = true
+                            }
+                            print("Vertical")
+                        }
+                        else{
+                            isShipOkToPlace = true
+                        }
+                    }
+                    if isShipOkToPlace == false{
+                        randRow = Int(arc4random_uniform(10))
                     }
                 }
                 print(randRow,randColumn)
             }
-        
-        workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
-         return workingBoard
-}
+        return ( randRow, randColumn, orientation, isShipOkToPlace)
+        }
     
+    func generateRandomCoordinates() -> (Int,Int,Int){
+        
+        let randRow = Int(arc4random_uniform(10))
+        let randColumn = Int(arc4random_uniform(10))
+        let orientationRandomizer = Int(arc4random_uniform(2))
+        
+        return (randRow, randColumn, orientationRandomizer)
+    }
+    
+}
+
+
 //    func fireOnUnknownSpot(){
 //        print("Where would you like to fire? Enter row number first \n")
 //
@@ -112,4 +142,4 @@ struct Player: CustomStringConvertible{
 //
 //
 //    }
-}
+
