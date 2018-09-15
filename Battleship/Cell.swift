@@ -49,32 +49,32 @@ struct Cell: CustomStringConvertible{                                           
         case "c":                                                                                                   // This option changes the cell to a * for hitting a cruiser location
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
             print("\n")
-            print("That's a hit!")
+            print("That's a hit! \n")
         case "b":                                                                                                   // This option changes the cell to a * for hitting a battleship location
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
             print("\n")
-            print("That's a hit!")
+            print("That's a hit! \n")
         case "r":                                                                                                   // This option changes the cell to a * for hitting a cruiser location
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
             print("\n")
-            print("That's a hit!")
+            print("That's a hit! \n")
         case "s":                                                                                                   // This option changes the cell to a * for hitting submarine location
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
             print("\n")
-            print("That's a hit!")
+            print("That's a hit! \n")
         case "d":                                                                                                   // This option changes the cell to a * for hitting a destroyer location
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
             print("\n")
-            print("That's a hit!")
+            print("That's a hit! \n")
             
         default:                                                                                                    // The default class handles both hitting a previously hit location
             if workingBoard.grid[numRowChoice][numColumnChoice].symbol == "*"{                                      // and if it is an empty location, a "m" is placed on the board.
                 print("This spot has already been hit")
-                print("Try again!")
+                print("Try again! \n")
             }
             else{
                 workingBoard.grid[numRowChoice][numColumnChoice].symbol = "m"}
-                print("Whoops, that's a miss. Try again!")
+                print("Whoops, that's a miss. Try again! \n")
         }
         
     }

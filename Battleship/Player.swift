@@ -199,7 +199,8 @@ struct Player: CustomStringConvertible{                                         
     
     func fireOnUnknownSpot() -> (Int,Int){
         print("")
-        print("Where would you like to fire? Enter row number first, then space, then column\n")                            // The user is prompted how to correctly enter a valid input.
+        print("Look to the lower grid:")
+        print("Where would you like to fire? Enter row number 1st, then space, then column number\n")                       // The user is prompted how to correctly enter a valid input.
         
         var rowChoice: String = ""                                                                                          // Since the readline statement is of type String?, two strings
         var columnChoice: String = ""                                                                                       // initialized to contain their input.
@@ -214,8 +215,9 @@ struct Player: CustomStringConvertible{                                         
             
         let realColumn = columnNumber!
         let realRow = rowNumber!
-         
-        print("You fired on \(rowChoice),\(columnChoice)")                                                                  // This reminds the user where they chose to fire.
+        
+        print("")
+        print("You fired on \(rowChoice),\(columnChoice) \n")                                                                  // This reminds the user where they chose to fire.
             
           return (realRow, realColumn)                                                                                      // Here, a tuple is returned to be stripped by the checkSpot method
         }                                                                                                                   // in the Cell struct.
