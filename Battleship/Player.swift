@@ -11,7 +11,7 @@
 //
 import Foundation
 
-// This types create defines a player, their attributes, and the things they
+// This types create defines a player, their properties, and the things they
 // can do during the game.
 
 struct Player: CustomStringConvertible{                                                                 // This struct conforms to the CustonStringConvertible type,
@@ -168,65 +168,72 @@ struct Player: CustomStringConvertible{                                         
     
     
     func placeShipOnBoard( playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, Orientation: Int) -> BattleshipBoard{
-        var randRow = randRow
-        var randColumn = randColumn
+        
+        var randRow = randRow                                                                                                // These are all locally defined variables of the passed
+        var randColumn = randColumn                                                                                          // in parameters
         let workingBoard = board
-        _ = workingBoard.grid[randRow][randColumn].symbol
-        for _ in 0..<playerShip.length{
-            workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
-            if Orientation == 1{
-                workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
+        
+        _ = workingBoard.grid[randRow][randColumn].symbol                                                                    // This variable holds the symbol of the cell being placed in.
+        
+        for _ in 0..<playerShip.length{                                                                                      // This loop walks through the length of the ship.
+           
+            workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol                                                // This applies the symbol of the current ship parameter
+                                                                                                                             // to its respective place on the grid.
+            if Orientation == 1{                                                                                             // If the ship is to be placed horizontally, then this increases
+                workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol                                            // the column index to push it in that way.
                 randColumn += 1
                 
             }
-            if Orientation == 0{
-                workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
+            if Orientation == 0{                                                                                             // If the ship is to be placed vertically, then this increases
+                workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol                                            // the row index to push it in that way.
                 randRow += 1
             }
         }
         
-        return workingBoard
-    }
+        return workingBoard                                                                                                  // This returns a current, updated copy of the board to be futher
+    }                                                                                                                        // added upon.
 
-
-
+    /* This method takes user input for a row and column location
+       on the grid and translates it into a tuple of integers, which can be
+       stripped by checkMove method in the Cell struct. */
+    
     func fireOnUnknownSpot() -> (Int,Int){
-        print("Where would you like to fire? Enter row number first, then space, then column\n")
-
+        print("")
+        print("Where would you like to fire? Enter row number first, then space, then column\n")                            // The user is prompted how to correctly enter a valid input.
         
-        
-        var rowChoice: String = ""
-        var columnChoice: String = ""
+        var rowChoice: String = ""                                                                                          // Since the readline statement is of type String?, two strings
+        var columnChoice: String = ""                                                                                       // initialized to contain their input.
 
-        let EntryOptional = readLine()
+        let EntryOptional = readLine()                                                                                      // The input is created here and is unwrapped using force unwrapping.
         let entry = EntryOptional!
-        columnChoice = String(entry.suffix(1))
-        rowChoice = String(entry.prefix(1))
+        columnChoice = String(entry.suffix(1))                                                                              // Since the column choice is 2nd, it is stripped from the string using
+        rowChoice = String(entry.prefix(1))                                                                                 // the suffix method, and vice-versa for the row value.
             
-        let columnNumber = Int(columnChoice)
-        let rowNumber = Int(rowChoice)
+        let columnNumber = Int(columnChoice)                                                                                // These type-casted Strings are again converted to integers,
+        let rowNumber = Int(rowChoice)                                                                                      // which are further unwrapped below using force unwrapping.
             
         let realColumn = columnNumber!
         let realRow = rowNumber!
          
-        print("You fired on \(rowChoice),\(columnChoice)")
+        print("You fired on \(rowChoice),\(columnChoice)")                                                                  // This reminds the user where they chose to fire.
             
-          return (realRow, realColumn)
-        }
+          return (realRow, realColumn)                                                                                      // Here, a tuple is returned to be stripped by the checkSpot method
+        }                                                                                                                   // in the Cell struct.
     
             }
 
-   
-    func gameWonYet(sinkCounter1: Int, sinkCounter2: Int)  -> String{
-        var response: String = ""
+    /* This method decides when the game is to end, taking in the number of ships left
+       from the players and returning a boolean value to interact with the gameWon loop in the
+       battleshipGame instance. */
+
+    func gameWonYet(sinkCounter1: Int, sinkCounter2: Int)  ->  Bool{
+        var response: Bool =  false                                                                                         // Initially, the repsonse it set to continue the game.
         
-        if sinkCounter1 == 5{
-            response = ("Player 2 has won!")
-            print(response)
+        if sinkCounter1 == 5{                                                                                               // If either of the players sinkCounters shows all 5 ships sunk,
+            response = true                                                                                                 // then the game is over.
         }
         if sinkCounter2 == 5{
-            response = ("Player 1 has won!")
-            print(response)
+            response = true
         }
     return response
         }

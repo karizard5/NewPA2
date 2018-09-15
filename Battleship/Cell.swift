@@ -26,7 +26,8 @@ struct Cell: CustomStringConvertible{                                           
         return boardSymbol
     }
     
-    // This fucntion takes user firing input and changes the cell's symbol,
+    // This function takes user firing input from the firingOnUnknownSpot
+    // method in the player struct, and changes the cell's symbol
     // based on whether they hit a ship or open water
     
     mutating func checkMove(rowChoice: Int, columnChoice: Int, board: inout BattleshipBoard, player: Player){       // This function parameters accept integer vales representing the row
