@@ -40,51 +40,40 @@ struct BattleshipGame: CustomStringConvertible{
         
         
         print(rules,"\n")
-        print("Player 1's board: \n")
-        var playerOneBoard = BattleshipBoard()
-        var playerTwoBoard = BattleshipBoard()
+        
+        let playerOneBoard = BattleshipBoard()
+        let playerTwoBoard = BattleshipBoard()
         
         var gameWon: Bool = false
         
         
-        var playerOne = Player(battleShipBoard: playerOneBoard, ships: [] , playerNumber: 1, hits: 0, misses: 0, totalShots: 0, shipsLeft: 5)
+        let playerOne = Player(battleShipBoard: playerOneBoard, ships: [] , playerNumber: 1, hits: 0, misses: 0, totalShots: 0, shipsLeft: 5)
         var playerOneShips = playerOne.createShipsOnBoard()
-        //var player1Coordinates = Player.generateRandomCoordinatesPlayer1(playerOne)
+        
         
         print("")
-        print("Player 2's board: \n")
         
-        var playerTwo = Player(battleShipBoard: playerTwoBoard, ships: [], playerNumber: 2, hits: 0, misses: 0, totalShots: 0, shipsLeft: 5)
+        
+        let playerTwo = Player(battleShipBoard: playerTwoBoard, ships: [], playerNumber: 2, hits: 0, misses: 0, totalShots: 0, shipsLeft: 5)
         var playerTwoShips = playerTwo.createShipsOnBoard()
-        //var player2Coordinates = Player.generateRandomCoordinatesPlayer2(playerTwo)
         
-        let player1CarrierCoods: (Int, Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[0], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
-        let player1BattleshipCoords: (Int, Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[1], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
-        let player1CrusierCoords: (Int, Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[2], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
-        let player1SubCoords: (Int, Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[3], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
-        let player1DestroyerCoords: (Int, Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[4], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
+        
+        let player1CarrierCoods: (Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[0], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
+        let player1BattleshipCoords: (Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[1], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
+        let player1CrusierCoords: (Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[2], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
+        let player1SubCoords: (Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[3], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
+        let player1DestroyerCoords: (Int, Int, Int) = playerOne.checkShipSpace(playerShip: playerOneShips[4], board: playerOneBoard, randRow: Player.generateRandomCoordinatesPlayer1(playerOne)().0, randColumn: Player.generateRandomCoordinatesPlayer1(playerOne)().1, orientation: Player.generateRandomCoordinatesPlayer1(playerOne)().2)
  
+
+        print("")
+        let player2CarrierCoods: (Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[0], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
+        let player2BattleshipCoords: (Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[1], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
+        let player2CrusierCoords: (Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[2], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
+        let player2SubCoords: (Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[3], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
+        let player2DestroyerCoords: (Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[4], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
         
-        print("\n PlayerOne updated board \n")
-        
-        
-        
+        print("")
        
-        
-        
-        
-        print(player1CarrierCoods)
-        print(playerOneShips[0].length)
-        //}
-        print("")
-        let player2CarrierCoods: (Int, Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[0], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
-        let player2BattleshipCoords: (Int, Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[1], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
-        let player2CrusierCoords: (Int, Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[2], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
-        let player2SubCoords: (Int, Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[3], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
-        let player2DestroyerCoords: (Int, Int, Int, Int) = playerTwo.checkShipSpace(playerShip: playerOneShips[4], board: playerTwoBoard, randRow: Player.generateRandomCoordinatesPlayer2(playerTwo)().0, randColumn: Player.generateRandomCoordinatesPlayer2(playerTwo)().1, orientation: Player.generateRandomCoordinatesPlayer2(playerTwo)().2)
-        
-        print("")
-        print("This is player 2's data: \n")
         
        var workingBoard1 = BattleshipBoard()
         workingBoard1 = playerOne.placeShipOnBoard(playerShip: playerOneShips[0], board: playerOneBoard, randRow: player1CarrierCoods.0, randColumn: player1CarrierCoods.1, Orientation: player1CarrierCoods.2)
@@ -92,6 +81,8 @@ struct BattleshipGame: CustomStringConvertible{
         workingBoard1 = playerOne.placeShipOnBoard(playerShip: playerOneShips[2], board: workingBoard1, randRow: player1CrusierCoords.0, randColumn: player1CrusierCoords.1, Orientation: player1CrusierCoords.2)
         workingBoard1 = playerOne.placeShipOnBoard(playerShip: playerOneShips[3], board: workingBoard1, randRow: player1SubCoords.0, randColumn: player1SubCoords.1, Orientation: player1SubCoords.2)
         workingBoard1 = playerOne.placeShipOnBoard(playerShip: playerOneShips[4], board: workingBoard1, randRow: player1DestroyerCoords.0, randColumn: player1DestroyerCoords.1, Orientation: player1DestroyerCoords.2)
+        
+        print("Here are the set boards: \n")
         print("\(workingBoard1) \n")
         
         var workingBoard2 = BattleshipBoard()
@@ -101,17 +92,13 @@ struct BattleshipGame: CustomStringConvertible{
         workingBoard2 = playerOne.placeShipOnBoard(playerShip: playerTwoShips[3], board: workingBoard2, randRow: player2SubCoords.0, randColumn: player2SubCoords.1, Orientation: player2SubCoords.2)
         workingBoard2 = playerOne.placeShipOnBoard(playerShip: playerTwoShips[4], board: workingBoard2, randRow: player2DestroyerCoords.0, randColumn: player2DestroyerCoords.1, Orientation: player2DestroyerCoords.2)
         print(workingBoard2)
-        
-        
-       
-        
-        
+
         while gameWon != true{
             var playerMover = 0
             
             
             let firingCoordinatesOne = playerOne.fireOnUnknownSpot()
-            var playerOneWorkingBoard = playerOneBoard.grid[firingCoordinatesOne.0][firingCoordinatesOne.1].checkMove(rowChoice: firingCoordinatesOne.0, columnChoice: firingCoordinatesOne.1, board: &workingBoard2)
+            var playerOneWorkingBoard = playerOneBoard.grid[firingCoordinatesOne.0][firingCoordinatesOne.1].checkMove(rowChoice: firingCoordinatesOne.0, columnChoice: firingCoordinatesOne.1, board: &workingBoard2, player: playerOne)
             print("Here's player 2's board: \n")
             print(workingBoard1)
             print("")
@@ -119,7 +106,7 @@ struct BattleshipGame: CustomStringConvertible{
             print(playerMover)
         
             var firingCoordinates = playerTwo.fireOnUnknownSpot()
-            var playerTwoWorkingBoard = playerTwoBoard.grid[firingCoordinates.0][firingCoordinates.1].checkMove(rowChoice: firingCoordinates.0, columnChoice: firingCoordinates.1, board: &workingBoard1)
+            var playerTwoWorkingBoard = playerTwoBoard.grid[firingCoordinates.0][firingCoordinates.1].checkMove(rowChoice: firingCoordinates.0, columnChoice: firingCoordinates.1, board: &workingBoard1, player: playerTwo)
             print("Here's your board: \n")
             print(workingBoard2)
             print("")
@@ -129,9 +116,6 @@ struct BattleshipGame: CustomStringConvertible{
             
             
         }
-        
-
-    
 
 }
 

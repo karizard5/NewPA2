@@ -1,5 +1,3 @@
-
-
 //  Player.swift
 //  Battleship
 //
@@ -45,133 +43,136 @@ struct Player: CustomStringConvertible{                                         
     
     func createShipsOnBoard() -> [Ship]{
         
-        var carrier = Ship(name: "Carrier", length: 5, symbol: "c", hits: 0)
-        var battleship = Ship(name: "Battleship", length: 4, symbol: "b", hits: 0)
-        var crusier = Ship(name: "Crusier", length: 3, symbol: "r", hits: 0)
-        var submarine = Ship(name: "Submarine", length: 3, symbol: "s", hits: 0)
-        var destroyer = Ship(name: "Destroyer", length: 2, symbol: "d", hits: 0)
+        let carrier = Ship(name: "Carrier", length: 5, symbol: "c", hits: 0)                            // Each ship is initialized to their name, length, symbol, and number of hits
+        let battleship = Ship(name: "Battleship", length: 4, symbol: "b", hits: 0)                      // individually.
+        let crusier = Ship(name: "Crusier", length: 3, symbol: "r", hits: 0)
+        let submarine = Ship(name: "Submarine", length: 3, symbol: "s", hits: 0)
+        let destroyer = Ship(name: "Destroyer", length: 2, symbol: "d", hits: 0)
         
+        let playerShips = [carrier, battleship, crusier, submarine, destroyer]                          // Each Ship object is placed in an array of ships for the user to access.
         
-        
-        var playerShips = [carrier, battleship, crusier, submarine, destroyer]
-        
-        print("Here is the current Board")
-        print(battleShipBoard)
-        
-        return playerShips
+        return playerShips                                                                              // Returns an array of Ships
     }
     
-    func checkShipSpace(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, orientation: Int) -> (Int, Int, Int, Int){
-        var workingBoard = board
-        let randomTuple1 = generateRandomCoordinatesPlayer1()
-        let randomTuple2 = generateRandomCoordinatesPlayer2()
-        var randRow = randomTuple1.0
-        var randColumn = randomTuple1.1
-        var orientation = randomTuple1.2
-        let shipLength = playerShip.length
-        var isShipOkToPlace = true
-        var counterCheck: Int = 0
-        
-        
-        
-            while isShipOkToPlace == true{
+    /* This function checks to see if the ship has enough room to be
+       placed in a random location chosen randomly. It takes individiual
+       ships, the board they are placed on, the random row and column indexes,
+       as well as a random orientation value to deliniate horizonal or
+       vertical positioning. This functions returns a tuple of integers that can
+       be accessed by the placeShipsOnBoard method*/
     
-                if orientation == 1{
-                let rowLength = workingBoard.grid[randRow].count
+    func checkShipSpace(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, orientation: Int) -> (Int, Int, Int){
+        
+        let workingBoard = board                                                                                // A local copy of a board Object is created.
+        let randomTuple1 = generateRandomCoordinatesPlayer1()                                                   // Random orientation and coordinates are created.
+        
+        let randRow = randomTuple1.0                                                                            // Each integer is stripped from the tuple and
+        let randColumn = randomTuple1.1                                                                         // assigned to its own local variable
+        let orientation = randomTuple1.2
+        
+        let shipLength = playerShip.length                                                                      // Ship length is declared as a local variable
+        var isShipOkToPlace = true                                                                              // Default boolean, the space is fine until proven otherwise
+        
+        while isShipOkToPlace == true{                                                                          // Maintain loop while the ship has room to be placed
+
+            if orientation == 1{                                                                                // Case for Horizontal orientation
+                
+            let rowLength = workingBoard.grid[randRow].count                                                    // Establishes rowLength of current row index as local comparable variable
+            for i in randRow..<(shipLength + randRow){                                                          // Starts the loop at the index of the random row index and checks enough
+                                                                                                                // spots to cover the length of the ship.
+                if i >= rowLength{                                                                              // If the index is out of range, this breaks out of the loop.
+                    break
+                }
+                if i < rowLength && workingBoard.grid[randRow][i].symbol == "-" {                               // Checks if the index is valid and the grid slot is empty.
+                    isShipOkToPlace = false                                                                     // If slot is ok, nothing happens and the loop moves to the next avaliable slot.
                     
-                for i in randRow..<(shipLength + randRow){
-                    if i >= rowLength{
-                        randRow -= 2
+                    if randRow == (shipLength + randRow){
+                        isShipOkToPlace = true
+                        }
+                    }
+                else {
+                    isShipOkToPlace = true
+                    }
+                }
+            
+            }
+            
+            if orientation == 0{                                                                                 // This block of code is the same as above, but for the vertical position,
+                                                                                                                 // as delineated by the orientation counter.
+            let columnLength = workingBoard.grid[randColumn].count
+                for i in randColumn..<(shipLength + randColumn){
+                    if i >= columnLength{
                         break
                     }
-                    if i < rowLength && workingBoard.grid[randRow][i].symbol == "-" {
-                        
+                    if i < columnLength && workingBoard.grid[i][randColumn].symbol == "-"{
                         isShipOkToPlace = false
-                        if randRow == (shipLength + randRow){
+                        if randColumn == (shipLength + randColumn){
                             isShipOkToPlace = true
                         }
-                        //print("Horizontal")
-                       counterCheck += 1
-                        
-                        }
-                    else {
+                    }
+                    else{
                         isShipOkToPlace = true
                     }
-                    }
-                if isShipOkToPlace == false{
-                    //randColumn = Int(arc4random_uniform(9))
                 }
-                }
-                    
-                
-                
-                if orientation == 0{
-                let columnLength = workingBoard.grid[randColumn].count
-                    
-                    for i in randColumn..<(shipLength + randColumn){
-                        if i >= columnLength{
-                            randColumn -= 2
-                            break
-                        }
-                        if i < columnLength && workingBoard.grid[i][randColumn].symbol == "-"{
-                            isShipOkToPlace = false
-                            if randColumn == (shipLength + randColumn){
-                                isShipOkToPlace = true
-                            }
-                            //print("Vertical")
-                            counterCheck += 1
-                        }
-                        else{
-                            isShipOkToPlace = true
-                        }
-                    }
-                    if isShipOkToPlace == false{
-                        //randRow = Int(arc4random_uniform(9))
-                    }
-                }
-               // print("Column: \(randRow), Row: \(randColumn)")
-        }
+            }
+           
+    }
         
-        return ( randRow, randColumn, orientation, counterCheck)
-        }
+        return (randRow, randColumn, orientation)                                                                // This returns a valid tuple of integers that the placeShipsOnBoard function
+        }                                                                                                        // knows will work. Unfortunately, I could not fix the bug where the index goes
+                                                                                                                 // out of range. Sometimes, the boards are generated correctly, but at times
+                                                                                                                 // they fail because the index is out of range.
     
+    
+    /* This function generates a unique set of coordinates to be tested for the placement
+       of player one's ships. This function returns a tuple of integers to be stripped by the
+       function above, checkSpaces, to see if they are valid indexes on the board.*/
+   
     func generateRandomCoordinatesPlayer1() -> (Int,Int,Int){
         
+        var randRow = Int(arc4random_uniform(10))                                                                // These functions cast random row, column, and orientation values as
+        var randColumn = Int(arc4random_uniform(10))                                                             // Int's for use in other methods.
+        let orientationRandomizer = Int(arc4random_uniform(2))
+        
+        if randColumn == 10{                                                                                     // These two if statements are supposed to check if the index
+            randColumn -= 1                                                                                      // is too big, and reduce the index size.
+        }
+        if randRow == 10{
+            randRow -= 1
+        }
+        
+        return (randRow, randColumn, orientationRandomizer)                                                       // This returns the aformentioned tuple of integers.
+    }
+    
+    func generateRandomCoordinatesPlayer2() -> (Int,Int,Int){                                                     // This method works exactly the same as the one above.
+                                                                                                                  // It was made to generate another unique set of coordinates to be used
+                                                                                                                  // for ship placement.
         var randRow = Int(arc4random_uniform(10))
         var randColumn = Int(arc4random_uniform(10))
-        let orientationRandomizer = Int(arc4random_uniform(2))
+        let orientationRandomizer = Int(arc4random_uniform(2))                                                    //  ""                             ""
+        
         if randColumn == 10{
             randColumn -= 1
         }
         if randRow == 10{
             randRow -= 1
         }
-        
         return (randRow, randColumn, orientationRandomizer)
     }
     
-    func generateRandomCoordinatesPlayer2() -> (Int,Int,Int){
-        
-        var randRow = Int(arc4random_uniform(10))
-        var randColumn = Int(arc4random_uniform(10))
-        let orientationRandomizer = Int(arc4random_uniform(2))
-        print(randColumn)
-        print(randRow)
-        if randColumn == 10{
-            randColumn -= 1
-        }
-        if randRow == 10{
-            randRow -= 1
-        }
-        return (randRow, randColumn, orientationRandomizer)
-    }
+    /* This method takes valid indexes determined by the checkSpaces method
+       and places ships in their valid coordinate locations on the players'
+       respective board. The function takes the parameters of the individual
+       ship to be placed, the board it will be placed on, the random valid coordinates,
+       and its orientation on the board. This method returns an updated copy of the board. */
+    
     
     func placeShipOnBoard( playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, Orientation: Int) -> BattleshipBoard{
         var randRow = randRow
         var randColumn = randColumn
-        var workingBoard = board
-        var ship = workingBoard.grid[randRow][randColumn].symbol
-        for length in 0..<playerShip.length{
+        let workingBoard = board
+        _ = workingBoard.grid[randRow][randColumn].symbol
+        for _ in 0..<playerShip.length{
             workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
             if Orientation == 1{
                 workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
@@ -197,23 +198,22 @@ struct Player: CustomStringConvertible{                                         
         var rowChoice: String = ""
         var columnChoice: String = ""
 
-        var EntryOptional = readLine()
-        var entry = EntryOptional!
+        let EntryOptional = readLine()
+        let entry = EntryOptional!
         columnChoice = String(entry.suffix(1))
         rowChoice = String(entry.prefix(1))
             
-        var columnNumber = Int(columnChoice)
-        var rowNumber = Int(rowChoice)
+        let columnNumber = Int(columnChoice)
+        let rowNumber = Int(rowChoice)
             
-        var realColumn = columnNumber!
-        var realRow = rowNumber!
+        let realColumn = columnNumber!
+        let realRow = rowNumber!
          
         print("You fired on \(rowChoice),\(columnChoice)")
             
           return (realRow, realColumn)
         }
     
-        
             }
 
    
@@ -230,5 +230,7 @@ struct Player: CustomStringConvertible{                                         
         }
     return response
         }
-    
+
+
+
 

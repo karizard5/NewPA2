@@ -19,13 +19,10 @@ struct Ship: CustomStringConvertible{                                           
         return "\(name)"                                                                // String representation of ship name
     }
     
-    var name: String = ""                                                               // A Ship object has
-    var length: Int
+    var name: String = ""                                                               // A Ship object has a name, a length, a symbol,
+    var length: Int                                                                     // and a number of hits, which are all initialized.
     var symbol: Character = " "
     var hits: Int = 0
-    
-
-      
     }
     
     

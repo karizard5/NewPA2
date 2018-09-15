@@ -29,7 +29,7 @@ struct Cell: CustomStringConvertible{                                           
     // This fucntion takes user firing input and changes the cell's symbol,
     // based on whether they hit a ship or open water
     
-    mutating func checkMove(rowChoice: Int, columnChoice: Int, board: inout BattleshipBoard){                       // This function parameters accept integer vales representing the row
+    mutating func checkMove(rowChoice: Int, columnChoice: Int, board: inout BattleshipBoard, player: Player){       // This function parameters accept integer vales representing the row
                                                                                                                     // and column indexes of the board, as well as the reference
                                                                                                                     // to the current battleshipboard being fired on.
         
@@ -49,7 +49,6 @@ struct Cell: CustomStringConvertible{                                           
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
             print("\n")
             print("That's a hit!")
-            
         case "b":                                                                                                   // This option changes the cell to a * for hitting a battleship location
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
             print("\n")
