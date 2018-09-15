@@ -1,3 +1,5 @@
+
+
 //  Player.swift
 //  Battleship
 //
@@ -11,43 +13,51 @@
 //
 import Foundation
 
-struct Player: CustomStringConvertible{
+// This types create defines a player, their attributes, and the things they
+// can do during the game.
+
+struct Player: CustomStringConvertible{                                                                 // This struct conforms to the CustonStringConvertible type,
+                                                                                                        // returning the statistics of the player if desired.
     
     
-    var description: String{
-        var statistics = ""
-        statistics += "Hits: \(hits)\n"
-        statistics += "Misses: \(misses)\n"
+    var description: String{                                                                            // This description defines the statistics of the player
+        var statistics = ""                                                                             // during the past game.
+        statistics += "Hits: \(hits)\n"                                                                 // An empty string is created, and the hits, misses, total shots
+        statistics += "Misses: \(misses)\n"                                                             // fired, and a hits to miss ratio are computed and displayed.
         statistics += "Total Shots: \(totalShots)\n"
         statistics += "Hits to Misses Ratio: \(hits/(hits + misses)*100)%"
         return statistics
     }
       
-    var battleShipBoard: BattleshipBoard
-    var ships: [Ship]
+    var battleShipBoard: BattleshipBoard                                                                // A player has their own board, their five ships stored in an array,
+    var ships: [Ship]                                                                                   // and a player number.
     var playerNumber: Int
     
-    var hits: Int = 0
+    var hits: Int = 0                                                                                   // Here, the hits, misses, and total shots are initialized to zero.
     var misses: Int = 0
     var totalShots: Int = 0
     
-    var shipsLeft: Int
+    var shipsLeft: Int                                                                                  // Additionally, a counter variable is defined to track the number of
+                                                                                                        // ships a player has left.
+    /* This function creates the five ships each player has, and
+       returns them in an array of ship objects.*/
+    
     
     func createShipsOnBoard() -> [Ship]{
         
-        var carrier = Ship(name: "Carrier", length: 5, occupiedCells: [], symbol: "c", hits: 0)
-        var battleship = Ship(name: "Battleship", length: 4, occupiedCells: [], symbol: "b", hits: 0)
-        var crusier = Ship(name: "Crusier", length: 3, occupiedCells: [], symbol: "r", hits: 0)
-        var submarine = Ship(name: "Submarine", length: 3, occupiedCells: [], symbol: "s", hits: 0)
-        var destroyer = Ship(name: "Destroyer", length: 2, occupiedCells: [], symbol: "d", hits: 0)
+        var carrier = Ship(name: "Carrier", length: 5, symbol: "c", hits: 0)
+        var battleship = Ship(name: "Battleship", length: 4, symbol: "b", hits: 0)
+        var crusier = Ship(name: "Crusier", length: 3, symbol: "r", hits: 0)
+        var submarine = Ship(name: "Submarine", length: 3, symbol: "s", hits: 0)
+        var destroyer = Ship(name: "Destroyer", length: 2, symbol: "d", hits: 0)
         
         
         
-        let playerShips = [carrier, battleship, crusier, submarine, destroyer]
+        var playerShips = [carrier, battleship, crusier, submarine, destroyer]
         
-        
+        print("Here is the current Board")
         print(battleShipBoard)
-        // print(playerShips)
+        
         return playerShips
     }
     
@@ -68,35 +78,39 @@ struct Player: CustomStringConvertible{
     
                 if orientation == 1{
                 let rowLength = workingBoard.grid[randRow].count
-                    for i in randRow..<(shipLength + randRow){
-                        if i >= rowLength{
-                            break
-                        }
-                        if i < rowLength && workingBoard.grid[randRow][i].symbol == "-" {
-                            
-                            isShipOkToPlace = false
-                            if randRow == (shipLength + randRow){
-                                isShipOkToPlace = true
-                            }
-                            print("Horizontal")
-                           counterCheck += 1
-                            
-                            }
-                        else {
+                    
+                for i in randRow..<(shipLength + randRow){
+                    if i >= rowLength{
+                        randRow -= 2
+                        break
+                    }
+                    if i < rowLength && workingBoard.grid[randRow][i].symbol == "-" {
+                        
+                        isShipOkToPlace = false
+                        if randRow == (shipLength + randRow){
                             isShipOkToPlace = true
                         }
+                        //print("Horizontal")
+                       counterCheck += 1
+                        
                         }
-                    if isShipOkToPlace == false{
-                        //randColumn = Int(arc4random_uniform(9))
+                    else {
+                        isShipOkToPlace = true
                     }
                     }
+                if isShipOkToPlace == false{
+                    //randColumn = Int(arc4random_uniform(9))
+                }
+                }
                     
                 
                 
                 if orientation == 0{
                 let columnLength = workingBoard.grid[randColumn].count
+                    
                     for i in randColumn..<(shipLength + randColumn){
                         if i >= columnLength{
+                            randColumn -= 2
                             break
                         }
                         if i < columnLength && workingBoard.grid[i][randColumn].symbol == "-"{
@@ -104,7 +118,7 @@ struct Player: CustomStringConvertible{
                             if randColumn == (shipLength + randColumn){
                                 isShipOkToPlace = true
                             }
-                            print("Vertical")
+                            //print("Vertical")
                             counterCheck += 1
                         }
                         else{
@@ -123,23 +137,36 @@ struct Player: CustomStringConvertible{
     
     func generateRandomCoordinatesPlayer1() -> (Int,Int,Int){
         
-        let randRow = Int(arc4random_uniform(9))
-        let randColumn = Int(arc4random_uniform(9))
+        var randRow = Int(arc4random_uniform(10))
+        var randColumn = Int(arc4random_uniform(10))
         let orientationRandomizer = Int(arc4random_uniform(2))
+        if randColumn == 10{
+            randColumn -= 1
+        }
+        if randRow == 10{
+            randRow -= 1
+        }
         
         return (randRow, randColumn, orientationRandomizer)
     }
     
     func generateRandomCoordinatesPlayer2() -> (Int,Int,Int){
         
-        let randRow = Int(arc4random_uniform(9))
-        let randColumn = Int(arc4random_uniform(9))
+        var randRow = Int(arc4random_uniform(10))
+        var randColumn = Int(arc4random_uniform(10))
         let orientationRandomizer = Int(arc4random_uniform(2))
-        
+        print(randColumn)
+        print(randRow)
+        if randColumn == 10{
+            randColumn -= 1
+        }
+        if randRow == 10{
+            randRow -= 1
+        }
         return (randRow, randColumn, orientationRandomizer)
     }
     
-    func placeShipOnBoard(playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, Orientation: Int) -> BattleshipBoard{
+    func placeShipOnBoard( playerShip: Ship, board: BattleshipBoard, randRow: Int, randColumn: Int, Orientation: Int) -> BattleshipBoard{
         var randRow = randRow
         var randColumn = randColumn
         var workingBoard = board
@@ -149,6 +176,7 @@ struct Player: CustomStringConvertible{
             if Orientation == 1{
                 workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol
                 randColumn += 1
+                
             }
             if Orientation == 0{
                 workingBoard.grid[randRow][randColumn].symbol = playerShip.symbol

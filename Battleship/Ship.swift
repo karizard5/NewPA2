@@ -10,18 +10,17 @@
 //
 import Foundation
 
+// This type defines a Ship object, which a player has 5 of in their ship array
 
-struct Ship: CustomStringConvertible{
-    
+struct Ship: CustomStringConvertible{                                                   // This struct conforms to the CustomStringConvertible protocol,
+                                                                                        // returning a string representation of the name of the ship.
     
     var description: String{
-        
-        return "\(name)"
+        return "\(name)"                                                                // String representation of ship name
     }
     
-    var name: String = ""
+    var name: String = ""                                                               // A Ship object has
     var length: Int
-    var occupiedCells: [Cell]
     var symbol: Character = " "
     var hits: Int = 0
     

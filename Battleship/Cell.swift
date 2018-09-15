@@ -29,43 +29,52 @@ struct Cell: CustomStringConvertible{                                           
     // This fucntion takes user firing input and changes the cell's symbol,
     // based on whether they hit a ship or open water
     
-    mutating func checkMove(rowChoice: Int, columnChoice: Int, board: inout BattleshipBoard){       // This function accepts integer vales representing the row
-                                                                                                    // and column indexes of the board, as well as the reference
-                                                                                                    // to the current battleshipboard being fired on
+    mutating func checkMove(rowChoice: Int, columnChoice: Int, board: inout BattleshipBoard){                       // This function parameters accept integer vales representing the row
+                                                                                                                    // and column indexes of the board, as well as the reference
+                                                                                                                    // to the current battleshipboard being fired on.
         
-        let numColumnChoice = columnChoice                                                          // Row and column indexes are declared as local variables
+        let numColumnChoice = columnChoice                                                                          // Row and column indexes are declared as local variables
         let numRowChoice = rowChoice
-        var workingBoard = board                                                                    // The board is also declared as a local variable
-        print("This is working")
-        print(workingBoard)
-        var consideredCharacter = workingBoard.grid[numRowChoice][numColumnChoice].symbol{
-            willSet {
-                print("\(consideredCharacter) is abot to be set to \(newValue)")
-            }
-        }
+        let workingBoard = board
         
-        switch consideredCharacter{
+                                                                                                                    // The board is also declared as a local variable
+        
+        let consideredCharacter = workingBoard.grid[numRowChoice][numColumnChoice].symbol                           // Sets avariable to the symbol of the
+        
+        switch consideredCharacter{                                                                                 // This switch statement cycles through the possible options to
+                                                                                                                    // change the cell symbol to, depending on whats in the cell.
             
-        case "c":
-           
-            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
-            print("This is really working")
             
-        case "b":
+        case "c":                                                                                                   // This option changes the cell to a * for hitting a cruiser location
             workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
-        case "r":
-            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
-        case "s":
-            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
-        case "d":
-            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
+            print("\n")
+            print("That's a hit!")
             
-        default:
-            if workingBoard.grid[numRowChoice][numColumnChoice].symbol == "*"{
+        case "b":                                                                                                   // This option changes the cell to a * for hitting a battleship location
+            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
+            print("\n")
+            print("That's a hit!")
+        case "r":                                                                                                   // This option changes the cell to a * for hitting a cruiser location
+            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
+            print("\n")
+            print("That's a hit!")
+        case "s":                                                                                                   // This option changes the cell to a * for hitting submarine location
+            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
+            print("\n")
+            print("That's a hit!")
+        case "d":                                                                                                   // This option changes the cell to a * for hitting a destroyer location
+            workingBoard.grid[numRowChoice][numColumnChoice].symbol = "*"
+            print("\n")
+            print("That's a hit!")
+            
+        default:                                                                                                    // The default class handles both hitting a previously hit location
+            if workingBoard.grid[numRowChoice][numColumnChoice].symbol == "*"{                                      // and if it is an empty location, a "m" is placed on the board.
                 print("This spot has already been hit")
+                print("Try again!")
             }
             else{
                 workingBoard.grid[numRowChoice][numColumnChoice].symbol = "m"}
+                print("Whoops, that's a miss. Try again!")
         }
         
     }

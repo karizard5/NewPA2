@@ -107,13 +107,32 @@ struct BattleshipGame: CustomStringConvertible{
         
         
         while gameWon != true{
-           var firingcoordinates = playerOne.fireOnUnknownSpot()
-            var playerOneWorkingBoard = playerOneBoard.grid[firingcoordinates.0][firingcoordinates.1].checkMove(rowChoice: firingcoordinates.0, columnChoice: firingcoordinates.1, board: &workingBoard2)
+            var playerMover = 0
+            
+            
+            let firingCoordinatesOne = playerOne.fireOnUnknownSpot()
+            var playerOneWorkingBoard = playerOneBoard.grid[firingCoordinatesOne.0][firingCoordinatesOne.1].checkMove(rowChoice: firingCoordinatesOne.0, columnChoice: firingCoordinatesOne.1, board: &workingBoard2)
+            print("Here's player 2's board: \n")
+            print(workingBoard1)
+            print("")
+            playerMover += 1
+            print(playerMover)
+        
+            var firingCoordinates = playerTwo.fireOnUnknownSpot()
+            var playerTwoWorkingBoard = playerTwoBoard.grid[firingCoordinates.0][firingCoordinates.1].checkMove(rowChoice: firingCoordinates.0, columnChoice: firingCoordinates.1, board: &workingBoard1)
+            print("Here's your board: \n")
             print(workingBoard2)
+            print("")
+            playerMover += 1
+            print(playerMover)
+            
+            
+            
         }
         
 
-    }
+    
 
 }
 
+}
